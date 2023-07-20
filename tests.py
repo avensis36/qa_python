@@ -6,12 +6,12 @@ class TestBooksCollector:
 
     def test_books_genre_true(self, collector_example):
 
-        list_of_books = {'Томиэ': '',
+        list_of_books = {'Томэ': '',
                          '10 негритят': 'Детективы',
                          'Зодиак': 'Детективы',
                          'Остров сокровищ': 'Мультфильмы'}
 
-        assert collector_example.books_genre == list_of_books
+        assert collector_example.books_genre == list_of_books, 'dictionary items differ, must be the same'
 
     def test_favourites_true(self, collector_example):
 
