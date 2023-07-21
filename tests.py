@@ -6,7 +6,7 @@ class TestBooksCollector:
 
     def test_books_genre_true(self, collector_example):
 
-        list_of_books = {'Томэ': '',
+        list_of_books = {'Томиэ': '',
                          '10 негритят': 'Детективы',
                          'Зодиак': 'Детективы',
                          'Остров сокровищ': 'Мультфильмы'}
@@ -15,15 +15,21 @@ class TestBooksCollector:
 
     def test_favourites_true(self, collector_example):
 
-        assert collector_example.favorites == ['Скитания Эманон', 'Скотный двор']
+        default_favorites = ['Скитания Эманон', 'Скотный двор']
+
+        assert collector_example.favorites == default_favorites
 
     def test_genre_true(self, collector_example):
 
-        assert collector_example.genre == ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии']
+        default_genres = ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии']
+
+        assert collector_example.genre == default_genres
 
     def test_genre_age_rating_true(self, collector_example):
 
-        assert collector_example.genre_age_rating == ['Ужасы', 'Детективы']
+        adult_genres = ['Ужасы', 'Детективы']
+
+        assert collector_example.genre_age_rating == adult_genres
 
 
     list_of_books = ['Мечта на поражение',
@@ -51,7 +57,9 @@ class TestBooksCollector:
 
     def test_get_book_genre_detective_true(self, collector_example):
 
-        assert collector_example.get_book_genre('10 негритят') == 'Детективы'
+        detective_genre = 'Детективы'
+
+        assert collector_example.get_book_genre('10 негритят') == detective_genre
 
     def test_get_books_with_specific_genre_get_two_detective_books(self, collector_example):
 
@@ -61,11 +69,15 @@ class TestBooksCollector:
 
     def test_get_books_genre_get_4_books(self, collector_example):
 
-        assert len(collector_example.get_books_genre()) == 4
+        len_of_books_genre = 4
+
+        assert len(collector_example.get_books_genre()) == len_of_books_genre
 
     def test_get_books_for_children_get_treasure_island(self, collector_example):
 
-        assert collector_example.get_books_for_children() == ['Остров сокровищ']
+        book_for_children = ['Остров сокровищ']
+
+        assert collector_example.get_books_for_children() == book_for_children
 
     def test_add_book_in_favorites_true(self, collector_example):
 
