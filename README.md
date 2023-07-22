@@ -1,11 +1,5 @@
 # Список реализованных тестов
 
-Тесты для конструктора, которые проверяют, правильно ли были присвоены значения для полей экземпляра класса:  
-`test_books_genre_true`  
-`test_favourites_true`  
-`test_genre_true`  
-`test_genre_age_rating_true`
-  
 Тест для метода `add_new_book`, который проверяет, что добавились именно три книги:  
 `test_add_new_book_three_books`
 
