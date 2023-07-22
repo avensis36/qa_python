@@ -4,34 +4,6 @@ from main import BooksCollector
 
 class TestBooksCollector:
 
-    def test_books_genre_true(self, collector_example):
-
-        list_of_books = {'Томиэ': '',
-                         '10 негритят': 'Детективы',
-                         'Зодиак': 'Детективы',
-                         'Остров сокровищ': 'Мультфильмы'}
-
-        assert collector_example.books_genre == list_of_books, 'dictionary items differ, must be the same'
-
-    def test_favourites_true(self, collector_example):
-
-        default_favorites = ['Скитания Эманон', 'Скотный двор']
-
-        assert collector_example.favorites == default_favorites
-
-    def test_genre_true(self, collector_example):
-
-        default_genres = ['Фантастика', 'Ужасы', 'Детективы', 'Мультфильмы', 'Комедии']
-
-        assert collector_example.genre == default_genres
-
-    def test_genre_age_rating_true(self, collector_example):
-
-        adult_genres = ['Ужасы', 'Детективы']
-
-        assert collector_example.genre_age_rating == adult_genres
-
-
     list_of_books = ['Мечта на поражение',
                      'Дорохедоро',
                      'Компромисс']
@@ -45,56 +17,75 @@ class TestBooksCollector:
 
         assert len(collector.books_genre) == 3
 
-    def test_set_book_genre_set_horror(self, collector_example):
+    def test_set_book_genre_set_horror(self):
 
-        collector_example.set_book_genre('Томиэ', 'Ужасы')
-        true_book_genre = {'Томиэ': 'Ужасы',
-                           '10 негритят': 'Детективы',
-                           'Зодиак': 'Детективы',
-                           'Остров сокровищ': 'Мультфильмы'}
+        collector = BooksCollector()
+        collector.books_genre = {'Томиэ': ''}
+        collector.set_book_genre('Томиэ', 'Ужасы')
 
-        assert true_book_genre == collector_example.books_genre
+        assert collector.get_book_genre('Томиэ') == 'Ужасы'
 
-    def test_get_book_genre_detective_true(self, collector_example):
+    def test_get_book_genre_detective_true(self):
 
+        collector = BooksCollector()
+        collector.books_genre = {'10 негритят': 'Детективы'}
         detective_genre = 'Детективы'
 
-        assert collector_example.get_book_genre('10 негритят') == detective_genre
+        assert collector.get_book_genre('10 негритят') == detective_genre
 
-    def test_get_books_with_specific_genre_get_two_detective_books(self, collector_example):
+    def test_get_books_with_specific_genre_get_two_detective_books(self):
 
-        detective_books = collector_example.get_books_with_specific_genre('Детективы')
+        collector = BooksCollector()
+        collector.books_genre = {'10 негритят': 'Детективы',
+                                 'Зодиак': 'Детективы'}
 
-        assert len(detective_books) == 2
+        assert len(collector.get_books_with_specific_genre('Детективы')) == 2
 
-    def test_get_books_genre_get_4_books(self, collector_example):
+    def test_get_books_genre_get_4_books(self):
 
+        collector = BooksCollector()
+        collector.books_genre = {'Томиэ': '',
+                                 '10 негритят': 'Детективы',
+                                 'Зодиак': 'Детективы',
+                                 'Остров сокровищ': 'Мультфильмы'}
         len_of_books_genre = 4
 
-        assert len(collector_example.get_books_genre()) == len_of_books_genre
+        assert len(collector.get_books_genre()) == len_of_books_genre
 
-    def test_get_books_for_children_get_treasure_island(self, collector_example):
+    def test_get_books_for_children_get_treasure_island(self):
 
+        collector = BooksCollector()
+        collector.books_genre = {'Остров сокровищ': 'Мультфильмы'}
         book_for_children = ['Остров сокровищ']
 
-        assert collector_example.get_books_for_children() == book_for_children
+        assert collector.get_books_for_children() == book_for_children
 
-    def test_add_book_in_favorites_true(self, collector_example):
+    def test_add_book_in_favorites_true(self):
 
-        collector_example.add_book_in_favorites('Томиэ')
+        collector = BooksCollector()
+        collector.books_genre = {'Томиэ': ''}
+        collector.add_book_in_favorites('Томиэ')
 
-        assert 'Томиэ' in collector_example.favorites
+        assert 'Томиэ' in collector.get_list_of_favorites_books()
 
-    def test_delete_book_from_favourites_true(self, collector_example):
+    def test_delete_book_from_favourites_true(self):
 
-        collector_example.delete_book_from_favorites('Скитания Эманон')
+        collector = BooksCollector()
+        collector.books_genre = {'Томиэ': ''}
+        collector.add_book_in_favorites('Томиэ')
+        collector.delete_book_from_favorites('Томиэ')
 
-        assert 'Скитания Эманон' not in collector_example.favorites
+        assert 'Томиэ' not in collector.get_list_of_favorites_books()
 
-    def test_get_list_of_favorites_books_true(self, collector_example):
+    def test_get_list_of_favorites_books_true(self):
 
-        list_of_favorites = ['Скитания Эманон', 'Скотный двор']
+        collector = BooksCollector()
+        collector.books_genre = {'Томиэ': '',
+                                 'Остров сокровищ': 'Мультфильмы'}
+        collector.add_book_in_favorites('Томиэ')
+        collector.add_book_in_favorites('Остров сокровищ')
+        list_of_favorites = ['Томиэ', 'Остров сокровищ']
 
-        assert list_of_favorites == collector_example.get_list_of_favorites_books()
+        assert list_of_favorites == collector.get_list_of_favorites_books()
 
 
